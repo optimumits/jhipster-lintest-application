@@ -1,16 +1,6 @@
 package com.optimumits.lintest.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 import com.optimumits.lintest.config.KafkaProperties;
-import java.time.Duration;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -25,7 +15,19 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.testcontainers.containers.KafkaContainer;
 
+import java.time.Duration;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 class JhipsterLinTestApplicationKafkaResourceIT {
+
     private static boolean started = false;
     private static KafkaContainer kafkaContainer;
 
@@ -61,8 +63,7 @@ class JhipsterLinTestApplicationKafkaResourceIT {
 
     @Test
     void producesMessages() throws Exception {
-        restMockMvc
-            .perform(post("/api/jhipster-lin-test-application-kafka/publish/topic-produce?message=value-produce"))
+        restMockMvc.perform(post("/api/jhipster-lin-test-application-kafka/publish/topic-produce?message=value-produce"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
@@ -83,8 +84,7 @@ class JhipsterLinTestApplicationKafkaResourceIT {
 
         producer.send(new ProducerRecord<>("topic-consume", "value-consume"));
 
-        MvcResult mvcResult = restMockMvc
-            .perform(get("/api/jhipster-lin-test-application-kafka/consume?topic=topic-consume"))
+        MvcResult mvcResult = restMockMvc.perform(get("/api/jhipster-lin-test-application-kafka/consume?topic=topic-consume"))
             .andExpect(status().isOk())
             .andExpect(request().asyncStarted())
             .andReturn();
@@ -117,3 +117,4 @@ class JhipsterLinTestApplicationKafkaResourceIT {
         return consumerProps;
     }
 }
+

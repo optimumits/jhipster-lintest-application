@@ -16,4 +16,5 @@ public class CucumberContextConfiguration {
         // Dummy method so cucumber will recognize this class as glue
         // and use its context configuration.
     }
+
 }

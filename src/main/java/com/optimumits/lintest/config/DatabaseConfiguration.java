@@ -1,12 +1,10 @@
 package com.optimumits.lintest.config;
 
+import io.github.jhipster.config.JHipsterConstants;
 import com.github.mongobee.Mongobee;
 import com.mongodb.MongoClient;
-import io.github.jhipster.config.JHipsterConstants;
 import io.github.jhipster.domain.util.JSR310DateConverters.DateToZonedDateTimeConverter;
 import io.github.jhipster.domain.util.JSR310DateConverters.ZonedDateTimeToDateConverter;
-import java.util.ArrayList;
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
@@ -21,7 +19,10 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 @EnableMongoRepositories("com.optimumits.lintest.repository")
@@ -29,6 +30,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 @Import(value = MongoAutoConfiguration.class)
 @EnableMongoAuditing(auditorAwareRef = "springSecurityAuditorAware")
 public class DatabaseConfiguration {
+
     private final Logger log = LoggerFactory.getLogger(DatabaseConfiguration.class);
 
     @Bean
@@ -59,5 +61,4 @@ public class DatabaseConfiguration {
         mongobee.setChangeLogsScanPackage("com.optimumits.lintest.config.dbmigrations");
         mongobee.setEnabled(true);
         return mongobee;
-    }
-}
+    }}

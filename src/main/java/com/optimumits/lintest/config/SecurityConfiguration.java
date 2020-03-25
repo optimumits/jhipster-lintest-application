@@ -2,6 +2,7 @@ package com.optimumits.lintest.config;
 
 import com.optimumits.lintest.security.*;
 import com.optimumits.lintest.security.jwt.*;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
@@ -18,6 +19,7 @@ import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @Import(SecurityProblemSupport.class)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
     private final TokenProvider tokenProvider;
     private final SecurityProblemSupport problemSupport;
 
